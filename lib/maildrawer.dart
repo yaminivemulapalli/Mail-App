@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'statemanage.dart';
+import 'providers/mail_provider.dart'; 
+import 'meet_provider.dart'; 
 
 class MyDrawer extends StatelessWidget {
-  final ValueSetter<String> onFilterSelect;
-  final ValueSetter<String> onMeetFilterselect;
-
   const MyDrawer({
     Key? key,
     required this.onFilterSelect,
     required this.onMeetFilterselect, required MyView view,
   }) : super(key: key);
 
+  final ValueSetter<String> onFilterSelect;
+  final ValueSetter<String> onMeetFilterselect;
+
   @override
   Widget build(BuildContext context) {
     final viewState = Provider.of<ViewStateManage>(context);
-    final MyView currentView = viewState.view;
+    final mailProvider = Provider.of<MailProvider>(context);
+    final meetProvider = Provider.of<MeetProvider>(context);
+     MyView currentView = viewState.view;
 
     List<Widget> drawerItems = [
       DrawerHeader(
@@ -37,28 +41,28 @@ class MyDrawer extends StatelessWidget {
         ListTile(
           title: Text('All Mail'),
           onTap: () {
-            onFilterSelect('All Mail');
+            mailProvider.updateMailFilter('All Mail');
             Navigator.pop(context);
           },
         ),
         ListTile(
           title: Text('Spam'),
           onTap: () {
-            onFilterSelect('Spam');
+            mailProvider.updateMailFilter('Spam');
             Navigator.pop(context);
           },
         ),
         ListTile(
           title: Text('Unread Mail'),
           onTap: () {
-            onFilterSelect('Unread Mail');
+            mailProvider.updateMailFilter('Unread Mail');
             Navigator.pop(context);
           },
         ),
         ListTile(
           title: Text('Deleted Mail'),
           onTap: () {
-            onFilterSelect('Deleted Mail');
+            mailProvider.updateMailFilter('Deleted Mail');
             Navigator.pop(context);
           },
         ),
@@ -68,21 +72,21 @@ class MyDrawer extends StatelessWidget {
         ListTile(
           title: Text('All Calls'),
           onTap: () {
-            onMeetFilterselect('All Calls');
+            meetProvider.updateMeetFilter('All Calls');
             Navigator.pop(context);
           },
         ),
         ListTile(
           title: Text('Rejected Calls'),
           onTap: () {
-            onMeetFilterselect('Rejected Calls');
+            meetProvider.updateMeetFilter('Rejected Calls');
             Navigator.pop(context);
           },
         ),
         ListTile(
           title: Text('Missed Calls'),
           onTap: () {
-            onMeetFilterselect('Missed Calls');
+            meetProvider.updateMeetFilter('Missed Calls');
             Navigator.pop(context);
           },
         ),

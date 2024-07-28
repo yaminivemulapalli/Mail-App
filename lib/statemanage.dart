@@ -9,8 +9,8 @@ class ViewStateManage extends ChangeNotifier {
   MyView get view => _view;
   PageController get pageController => _pageController;
 
-  void updateView(MyView view) {
-    _view = view;
+  void updateView(MyView newview) {
+    _view = newview;
     _pageController.jumpToPage(view == MyView.mail ? 0 : 1);
     notifyListeners();
   }
